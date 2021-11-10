@@ -1,0 +1,21 @@
+.dashboard {
+  display: flex;
+  height: calc(100vh-50px);
+  width: 100%;
+}
+.dashboard .left {
+  flex: 1;
+  padding: 20px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+}
+.dashboard .left .navigator {
+  border-radius: 0;
+  border: none;
+}
+.dashboard .left .navigator li {
+  border: none;
+  border-radius: 5px;
+}
+.dashboard .right {
+  flex: 4;
+}
