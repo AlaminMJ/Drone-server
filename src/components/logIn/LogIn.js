@@ -1,21 +1,41 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import useFirebase from "../../hooks/useFirebase";
 import "./logIn.css";
 const LogIn = () => {
+  const { signUp,user } = useFirebase();
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    signUp(data.email, data.password);
+  };
+  console.log(user);
   return (
     <div className="log-in">
       <div className="wrapper">
         <h3 className="text-center fw-normal text-primary">LogIn</h3>
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email </Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              {...register("email", { required: true })}
+            />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              {...register("password", { required: true })}
+            />
           </Form.Group>
 
           <Button

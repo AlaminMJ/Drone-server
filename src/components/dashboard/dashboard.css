@@ -1,12 +1,21 @@
 .dashboard {
   display: flex;
-  height: calc(100vh-50px);
+  height: calc(100vh - 50px);
   width: 100%;
 }
 .dashboard .left {
-  flex: 1;
+   width: 20%;
   padding: 20px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+}
+.dashboard .left .nav-icon {
+  font-size: 22px;
+  /* color: #fff; */
+  color: #333;
+  margin-right: 10px;
+}
+.dashboard .left .navigator li.active .nav-icon {
+  color: #fff;
 }
 .dashboard .left .navigator {
   border-radius: 0;
@@ -15,7 +24,15 @@
 .dashboard .left .navigator li {
   border: none;
   border-radius: 5px;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
+/* .dashboard .left .navigator li:hover {
+  background-color: royalblue;
+} */
 .dashboard .right {
-  flex: 4;
+ width: 80%;
+  padding: 20px;
 }

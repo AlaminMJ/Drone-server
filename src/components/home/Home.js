@@ -5,6 +5,18 @@ import { MdOutlinePrivacyTip } from "react-icons/md";
 import { BiBox, BiVideo, BiMapAlt, BiMicrophone } from "react-icons/bi";
 import { RiToolsFill } from "react-icons/ri";
 import Footer from "../../shared/footer/Footer";
+import Product from "../../shared/product/Product";
+import { Link } from "react-router-dom";
+import Review from "../../shared/review/Review";
+
+// swiper core styles
+import "swiper/swiper.min.css";
+import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
+import SwiperCore, { Pagination } from "swiper";
+import "swiper/swiper-bundle.css";
+// install Swiper modules
+SwiperCore.use([Pagination]);
+
 const Home = () => {
   return (
     <div className="home">
@@ -64,9 +76,53 @@ const Home = () => {
         </div>
       </section>
       {/* product */}
-      <section className="products">
+      <section className="products py-5">
         <div className="container">
           <h3 className="sub-title">Featured products</h3>
+          <div className="product-wrapper">
+            <Product />
+            <Product />
+            <Product />
+            <Product />
+            <Product />
+            <Product />
+          </div>
+          <div className="more">
+            <Link to="/">More</Link>
+          </div>
+        </div>
+      </section>
+      {/* Review */}
+      <section className="reviwes py-2">
+        <div className="container">
+          <h3 className="sub-title">Our Clint Say</h3>
+          <Swiper
+            slidesPerView={"auto"}
+            spaceBetween={30}
+            pagination={{
+              clickable: true,
+            }}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <Review />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Review />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Review />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Review />
+            </SwiperSlide>
+          </Swiper>
+          {/* <div className="reviwe-wrapper">
+            <Review />
+            <Review />
+            <Review />
+            <Review />
+          </div> */}
         </div>
       </section>
       {/* footer setcion */}

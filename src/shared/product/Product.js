@@ -1,6 +1,7 @@
 import React from "react";
-
-const ProductCard = () => {
+import { Link } from "react-router-dom";
+import "./product.css";
+const Product = () => {
   return (
     <div className="product">
       <div className="product-img">
@@ -9,12 +10,17 @@ const ProductCard = () => {
           alt=""
         />
       </div>
-      <h4 className="product-name"> Producnt name</h4>
+      <h4 className="product-title">
+        DJI Mavic 2 Enterprise Dual with Fly More Kit
+      </h4>
       <div className="cost">
-        <p className="price"></p>
+        <p className="price"> $45.89</p>
+        <Link to=" /shop" className="shop">
+          Shop
+        </Link>
       </div>
     </div>
   );
 };
 
-export default ProductCard;
+export default Product;

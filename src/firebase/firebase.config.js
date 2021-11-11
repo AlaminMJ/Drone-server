@@ -1,10 +1,10 @@
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDrWt8EauIJGZ2R8mCFoXrBStO2szlXkl0",
-  authDomain: "blood-bank-d81c6.firebaseapp.com",
-  projectId: "blood-bank-d81c6",
-  storageBucket: "blood-bank-d81c6.appspot.com",
-  messagingSenderId: "224463515465",
-  appId: "1:224463515465:web:03ae15dfacfe20594eb498",
+  apiKey: "AIzaSyDtsVetghfVu5CDWHwW93-0Lw3fuYtlRqU",
+  authDomain: "drone-33dc1.firebaseapp.com",
+  projectId: "drone-33dc1",
+  storageBucket: "drone-33dc1.appspot.com",
+  messagingSenderId: "942811246162",
+  appId: "1:942811246162:web:e9a256b78595475b2af98b",
 };
 export default firebaseConfig;

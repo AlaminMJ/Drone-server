@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import UseFirebase from "../hooks/useFirebase";
 export const FirebaseContext = createContext();
-const authContext = ({ children }) => {
+const AuthContext = ({ children }) => {
   const allContext = UseFirebase();
   return (
     <FirebaseContext.Provider value={allContext}>
@@ -10,4 +10,4 @@ const authContext = ({ children }) => {
   );
 };
 
-export default authContext;
+export default AuthContext;

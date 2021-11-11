@@ -1,0 +1,30 @@
+.review {
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px;
+  width: 350px;
+  display: inline-block;
+}
+.review .profile {
+  display: flex;
+  align-items: center;
+}
+.review .profile .avatar {
+  height: 35px;
+  width: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.review .profile .user-name {
+  font-size: 18px;
+  color: rgb(90, 90, 90);
+  margin-left: 10px;
+  font-weight: 600;
+}
+.review .content {
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+}

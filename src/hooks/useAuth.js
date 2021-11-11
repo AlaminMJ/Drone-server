@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { FirebaseContext } from "../context/authContext";
 
-const UseAuth = () => {
+const useAuth = () => {
   return useContext(FirebaseContext);
 };
-return UseAuth;
+export default useAuth;
