@@ -58,7 +58,7 @@ const AddReview = () => {
             rows={5}
             placeholder="message"
             required
-            {...register("massage", { required: true })}
+            {...register("message", { required: true })}
           />
         </Form.Group>
         <Form.Group as={Col} controlId="formGridPassword" className="mb-3">

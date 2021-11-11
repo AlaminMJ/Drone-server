@@ -8,7 +8,6 @@ import {
   IoCloseOutline,
   IoLogOutOutline,
   // IoPersonOutline,
-  IoCartOutline,
 } from "react-icons/io5";
 import UseFirebase from "../../hooks/useFirebase";
 
@@ -20,6 +19,7 @@ const Navbar = () => {
 
   // const {} = useAuth();
   const { logOut } = UseFirebase();
+
   return (
     <div className="navbar-m stic">
       <div className="container">
@@ -62,10 +62,7 @@ const Navbar = () => {
                 alt="profile"
               />
             </div>
-            <div className=" icons">
-              <IoCartOutline title="Cart" />
-              <span className="bedge">5</span>
-            </div>
+
             <div className=" icons" onClick={logOut}>
               <IoLogOutOutline title="Log Out" />
             </div>

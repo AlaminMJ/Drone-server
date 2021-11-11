@@ -7,8 +7,10 @@ import {
   signOut,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { axios } from "axios";
 
 firebaseInitialize();
 const useFirebase = () => {
@@ -32,9 +34,7 @@ const useFirebase = () => {
   const logInWithGoogle = () => {
     setIsLoading(true);
     signInWithPopup(auth, GoogleProvider)
-      .then((user) => {
-        console.log(user);
-      })
+      .then((user) => {})
       .catch((err) => {
         console.log(err);
       })
@@ -43,12 +43,15 @@ const useFirebase = () => {
       });
   };
   //   Sign Up
-  const signUp = (email, password) => {
+  const signUp = (email, password, callback) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {})
+      .then(() => {
+        callback(null);
+      })
       .catch((err) => {
         console.log(err);
+        callback("failur");
       })
       .finally(() => {
         setIsLoading(false);
@@ -57,11 +60,26 @@ const useFirebase = () => {
   const createUserEmail = (name, email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        setUser({
-          name,
-          email,
-        });
-        console.log(user);
+        console.log(name);
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL:
+            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+        })
+          .then(() => {
+            axios
+              .post("http://localhost:5000/users", {
+                name,
+                email: "demo",
+              })
+              .then((res) => {
+                console.log(res.data);
+              });
+          })
+          .catch((error) => {
+            // An error occurred
+            // ...
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -71,7 +89,10 @@ const useFirebase = () => {
   //   log out
   const logOut = () => {
     signOut(auth)
-      .then(() => {})
+      .then(() => {
+        setUser({});
+        console.log("logout");
+      })
       .catch(() => {})
       .finally(() => {});
   };

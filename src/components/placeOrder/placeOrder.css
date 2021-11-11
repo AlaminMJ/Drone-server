@@ -1,0 +1,11 @@
+.place-order .wrapper {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 40px;
+}
+.place-order .left {
+  flex: 1;
+}
+.place-order .right {
+  flex: 1;
+}

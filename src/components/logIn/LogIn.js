@@ -1,20 +1,27 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useFirebase from "../../hooks/useFirebase";
 import "./logIn.css";
 const LogIn = () => {
-  const { signUp,user } = useFirebase();
+  const location = useLocation();
+  let navigate = useNavigate();
+  let from = location.state?.from?.pathname || "/";
+  const { signUp, user } = useFirebase();
+
   const {
     register,
     handleSubmit,
-    // formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    signUp(data.email, data.password);
+    signUp(data.email, data.password, (err) => {
+      if (!err) {
+        navigate(from, { replace: true });
+      }
+      console.log(user);
+    });
   };
-  console.log(user);
   return (
     <div className="log-in">
       <div className="wrapper">
