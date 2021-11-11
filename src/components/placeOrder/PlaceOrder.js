@@ -27,12 +27,14 @@ const PlaceOrder = () => {
             <Card>
               <Card.Img variant="top" src={img} />
               <Card.Body>
-                <Card.Title>Card Title</Card.Title>
+                <Card.Title>
+                  DJI Mavic 2 Enterprise Dual with Fly More Kit
+                </Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  DJI Mavic 2 Enterprise Dual with Fly More Kit.DJI Mavic 2
+                  Enterprise Dual with Fly More Kit.DJI Mavic 2 Enterprise Dual
+                  with Fly More Kit
                 </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
               </Card.Body>
             </Card>
           </div>
@@ -82,8 +84,7 @@ const PlaceOrder = () => {
                 <Form.Label>Quantity</Form.Label>
                 <Form.Control
                   type="number"
-                  value="1"
-                  {...register("quantity", { required: true })}
+                  {...register("quantity", { value: 1, required: true })}
                 />
               </Form.Group>
 

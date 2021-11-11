@@ -30,10 +30,13 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/dashboard" element={<Dashboard />}>
               <Route path="addreview" element={<AddReview />} />
+              <Route path="" element={<MyOrder />} />
               <Route path="addproduct" element={<AddProduct />} />
               <Route path="myorder" element={<MyOrder />} />
               <Route path="Payment" element={<Payment />} />
               <Route path="makeadmin" element={<MakeAdmin />} />
+              <Route path="manageallproduct" element={<Payment />} />
+              <Route path="manageproduct" element={<MakeAdmin />} />
             </Route>
           </Routes>
         </BrowserRouter>

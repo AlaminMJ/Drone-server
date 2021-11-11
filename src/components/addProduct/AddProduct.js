@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Form, Row, Col, Button } from "react-bootstrap";
+import { Form, Col, Button } from "react-bootstrap";
 
 const AddProduct = () => {
   const {
@@ -18,31 +18,27 @@ const AddProduct = () => {
   return (
     <div className="add-product ">
       <Form className="w-75 mx-auto" onSubmit={handleSubmit(onSubmit)}>
-        <h1 className="display-3 text-center">Add Product</h1>
-        <Row>
-          <Col>
-            <Form.Group as={Col} controlId="formGridEmail" className="mb-3">
-              <Form.Label>Product Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Product Name"
-                required
-                {...register("name", { required: true })}
-              />
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group as={Col} controlId="formGridEmail" className="mb-3">
-              <Form.Label>Product title</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Product Name"
-                required
-                {...register("title", { required: true })}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+        <h1 className="display-5 text-center">Add Product</h1>
+
+        <Form.Group as={Col} controlId="formGridEmail" className="mb-3">
+          <Form.Label>Product Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Product Name"
+            required
+            {...register("name", { required: true })}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formGridEmail" className="mb-3">
+          <Form.Label>Product title</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Product Name"
+            required
+            {...register("title", { required: true })}
+          />
+        </Form.Group>
 
         <Form.Group as={Col} controlId="formGridEmail" className="mb-3">
           <Form.Label>Product Price</Form.Label>
@@ -61,6 +57,16 @@ const AddProduct = () => {
             placeholder="Product img url"
             required
             {...register("img", { required: true })}
+          />
+        </Form.Group>
+        <Form.Group as={Col} controlId="formGridEmail" className="mb-3">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={5}
+            placeholder="Product Price"
+            required
+            {...register("price", { required: true })}
           />
         </Form.Group>
 
