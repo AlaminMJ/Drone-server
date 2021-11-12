@@ -2,8 +2,10 @@ import React from "react";
 import "./payment.css";
 const Payment = () => {
   return (
-    <div className="payment">
-      <h1 className="display-1 text-center">Payment comming soon</h1>
+    <div className="payment p-5">
+      <h5 className="display-6 text-center text-success m-5">
+        Payment system comming soon
+      </h5>
     </div>
   );
 };

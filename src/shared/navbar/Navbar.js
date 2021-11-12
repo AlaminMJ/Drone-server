@@ -3,6 +3,7 @@ import "./navbar.css";
 import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
 // import useAuth from "../../hooks/useAuth";
+import { Button } from "react-bootstrap";
 import {
   IoMenuOutline,
   IoCloseOutline,
@@ -10,15 +11,17 @@ import {
   // IoPersonOutline,
 } from "react-icons/io5";
 import UseFirebase from "../../hooks/useFirebase";
+import CustomLink from "../customLilnk/CustomLink";
 
-const Navbar = () => {
+const Navbar = ({ to }) => {
   const [istoggle, setIstoggle] = useState(false);
   const toggle = () => {
     setIstoggle(!istoggle);
   };
 
   // const {} = useAuth();
-  const { logOut } = UseFirebase();
+  const { logOut, user } = UseFirebase();
+  console.log(user);
 
   return (
     <div className="navbar-m stic">
@@ -28,9 +31,9 @@ const Navbar = () => {
             <IoMenuOutline />
           </div>
           <div className="logo">
-            <Link to="/">
+            <CustomLink to="/">
               <img src={logo} alt="logo" />
-            </Link>
+            </CustomLink>
           </div>
           <div className={istoggle ? "menu active" : "menu"}>
             <ul className="navlist mb-0">
@@ -38,34 +41,38 @@ const Navbar = () => {
                 <IoCloseOutline />
               </div>
               <li className="nav-item">
-                <Link to="/" className="nav-link active">
-                  Home
-                </Link>
+                <CustomLink to="/">Home</CustomLink>
               </li>
               <li className="nav-item">
-                <Link to="/" className="nav-link">
-                  Explore
-                </Link>
+                <CustomLink to="/products">Products</CustomLink>
               </li>
-              <li className="nav-item">
-                <Link to="/dashboard" className="nav-link">
-                  Dashboard
-                </Link>
-              </li>
+              {user?.email && (
+                <li className="nav-item">
+                  <CustomLink to="/dashboard" className="nav-link">
+                    Dashboard
+                  </CustomLink>
+                </li>
+              )}
             </ul>
           </div>
           <div className="nav-icons">
-            <div className=" icons">
-              {/* <IoPersonOutline title="Profile" /> */}
-              <img
-                src="https://scontent.fdac138-1.fna.fbcdn.net/v/t1.6435-9/203228012_1339889339742318_2660820128908142869_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=E8OpIyrfG_0AX8nfKqj&_nc_ht=scontent.fdac138-1.fna&oh=6ed272aa3aad067321564124e0454aaa&oe=61B0EC46"
-                alt="profile"
-              />
-            </div>
-
-            <div className=" icons" onClick={logOut}>
-              <IoLogOutOutline title="Log Out" />
-            </div>
+            {user?.email ? (
+              <>
+                <div className=" icons">
+                  {/* <IoPersonOutline title="Profile" /> */}
+                  <img src={user?.photoURL} alt="profile" />
+                </div>
+                <div className=" icons" onClick={logOut}>
+                  <IoLogOutOutline title="Log Out" />
+                </div>
+              </>
+            ) : (
+              <div className=" icons">
+                <Link to="/login">
+                  <Button size="sm">LogIn</Button>
+                </Link>
+              </div>
+            )}
           </div>
         </nav>
       </div>

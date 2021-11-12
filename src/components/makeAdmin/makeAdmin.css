@@ -1,0 +1,10 @@
+.make-admin .wrapper {
+  width: 100%;
+  height: 400px;
+}
+.make-admin .form {
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}

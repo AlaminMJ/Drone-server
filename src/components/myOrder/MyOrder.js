@@ -4,7 +4,7 @@ import "./myOrder.css";
 const MyOrder = () => {
   return (
     <div className="my-order">
-      <h1 className="display-5 text-center">My Order</h1>
+      <h5 className="display-6 text-center mb-4 text-primary">My Order</h5>
       <div className="wrapper">
         <MyOrderCard />
         <MyOrderCard />

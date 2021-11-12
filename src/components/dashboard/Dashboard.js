@@ -1,7 +1,7 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 // import AddProduct from "../addProduct/AddProduct";
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import {
   BiCreditCardAlt,
   BiShoppingBag,
@@ -13,9 +13,8 @@ import {
 } from "react-icons/bi";
 import "./dashboard.css";
 import DashboardNav from "../../shared/dashboardNavbar/DashboardNav";
+import DeashboardActivelink from "../../shared/customLilnk/DeashboardActivelink";
 const Dashboard = () => {
-  const location = useLocation();
-
   return (
     <div>
       <DashboardNav />
@@ -23,93 +22,50 @@ const Dashboard = () => {
         <div className="left">
           <h4 className="mb-3">Dashboard</h4>
           <ListGroup as="ul" className="navigator">
-            <Link
-              to="myorder"
-              className={
-                location.pathname.split("/")[2] === "myorder" || ""
-                  ? "active "
-                  : ""
-              }
-            >
+            <DeashboardActivelink to="myorder">
               <ListGroup.Item as="li">
                 <BiShoppingBag className="nav-icon" /> My Order
               </ListGroup.Item>
-            </Link>
-            <Link
-              to="payment"
-              className={
-                location.pathname.split("/")[2] === "payment" ? "active " : ""
-              }
-            >
+            </DeashboardActivelink>
+            <DeashboardActivelink to="payment">
               <ListGroup.Item as="li">
                 <BiCreditCardAlt className="nav-icon" />
                 Payment
               </ListGroup.Item>
-            </Link>
-            <Link
-              to="addreview"
-              className={
-                location.pathname.split("/")[2] === "addreview" ? "active " : ""
-              }
-            >
+            </DeashboardActivelink>
+            <DeashboardActivelink to="addreview">
               <ListGroup.Item as="li">
                 <BiHeart className="nav-icon" />
                 Review
               </ListGroup.Item>
-            </Link>
+            </DeashboardActivelink>
           </ListGroup>
           {/* admin */}
           <ListGroup as="ul" className="navigator">
-            <Link
-              to="manageallproduct"
-              className={
-                location.pathname.split("/")[2] === "manageallproduct"
-                  ? "active "
-                  : ""
-              }
-            >
+            <DeashboardActivelink to="manageallproduct">
               <ListGroup.Item as="li">
                 <BiTask className="nav-icon" /> Manage All Product
               </ListGroup.Item>
-            </Link>
+            </DeashboardActivelink>
 
-            <Link
-              to="addproduct"
-              className={
-                location.pathname.split("/")[2] === "addproduct"
-                  ? "active "
-                  : ""
-              }
-            >
+            <DeashboardActivelink to="addproduct">
               <ListGroup.Item as="li">
                 <BiPlus className="nav-icon" />
                 Add A Product
               </ListGroup.Item>
-            </Link>
-            <Link
-              to="makeadmin"
-              className={
-                location.pathname.split("/")[2] === "makeadmin" ? "active " : ""
-              }
-            >
+            </DeashboardActivelink>
+            <DeashboardActivelink to="makeadmin">
               <ListGroup.Item as="li">
                 <BiUserPlus className="nav-icon" />
                 Make Admin
               </ListGroup.Item>
-            </Link>
-            <Link
-              to="manageproduct"
-              className={
-                location.pathname.split("/")[2] === "manageproduct"
-                  ? "active "
-                  : ""
-              }
-            >
+            </DeashboardActivelink>
+            <DeashboardActivelink to="manageproduct">
               <ListGroup.Item as="li">
                 <BiStats className="nav-icon" />
                 Manage products
               </ListGroup.Item>
-            </Link>
+            </DeashboardActivelink>
           </ListGroup>
         </div>
         <div className="right">

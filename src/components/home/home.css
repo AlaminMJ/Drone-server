@@ -1,13 +1,23 @@
 .home .banner {
   min-height: 550px;
   padding: 7rem 0;
-  background-image: url("../../images/banner.jpg");
+
   background-position: center;
   background-size: cover;
 }
 .home .banner {
   font-size: 3.625rem;
   color: var(--primary-color);
+}
+.banner-3 {
+  background-image: url("../../images/bg-3.jpg");
+}
+.banner-1 {
+  background-image: url("../../images/banner.jpg");
+}
+.banner-2 {
+  background-image: url("../../images/bg-10.jpg");
+  background-position: right;
 }
 .home .sub-title {
   text-align: center;

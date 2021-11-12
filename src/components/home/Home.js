@@ -12,23 +12,61 @@ import Review from "../../shared/review/Review";
 // swiper core styles
 import "swiper/swiper.min.css";
 import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
-import SwiperCore, { Pagination } from "swiper";
+import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.css";
 // install Swiper modules
-SwiperCore.use([Pagination]);
+SwiperCore.use([Pagination, Autoplay, Pagination, Navigation]);
 
 const Home = () => {
   return (
     <div className="home">
       <Navbar />
-      <div className="banner">
-        <div className="container">
-          <h1 className="title">
-            Top-Rated Camera <br /> Drones
-          </h1>
-        </div>
-      </div>
+
       {/* service section */}
+      {/* banner */}
+      <div className="banners">
+        <Swiper
+          spaceBetween={30}
+          centeredSlides={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <div className="banner banner-1">
+              <div className="container">
+                <h1 className="title">
+                  Top-Rated Camera <br /> Drones
+                </h1>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className=" banner banner-2">
+              <div className="container">
+                <h1 className="title">
+                  Top-Rated Camera <br /> Drones
+                </h1>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className=" banner banner-3">
+              <div className="container">
+                <h1 className="title">
+                  Top-Rated Camera <br /> Drones
+                </h1>
+              </div>
+            </div>
+          </SwiperSlide>
+        </Swiper>
+      </div>
       <section className="service py-5">
         <div className="container">
           <h1 className="sub-title">
@@ -88,7 +126,7 @@ const Home = () => {
             <Product />
           </div>
           <div className="more">
-            <Link to="/">More</Link>
+            <Link to="/products">More</Link>
           </div>
         </div>
       </section>

@@ -1,0 +1,16 @@
+.products .wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+}
+/* responsive */
+@media (max-width: 992px) {
+  .products .wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .products .wrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

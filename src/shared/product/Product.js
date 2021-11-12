@@ -16,7 +16,7 @@ const Product = () => {
       <div className="cost">
         <p className="price"> $45.89</p>
         <Link to=" /shop" className="shop">
-          Shop
+          purchase
         </Link>
       </div>
     </div>
