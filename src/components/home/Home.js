@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../shared/navbar/Navbar";
 import "./home.css";
 import { MdOutlinePrivacyTip } from "react-icons/md";
@@ -14,10 +14,29 @@ import "swiper/swiper.min.css";
 import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.css";
+import axios from "axios";
 // install Swiper modules
 SwiperCore.use([Pagination, Autoplay, Pagination, Navigation]);
 
 const Home = () => {
+  const [reviews, setReviews] = useState([]);
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    axios("https://peaceful-sands-20601.herokuapp.com/reviews")
+      .then((res) => {
+        setReviews(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios("https://peaceful-sands-20601.herokuapp.com/products")
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <div className="home">
       <Navbar />
@@ -118,12 +137,9 @@ const Home = () => {
         <div className="container">
           <h3 className="sub-title">Featured products</h3>
           <div className="product-wrapper">
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
+            {products.map((product) => (
+              <Product key={product._id} data={product} />
+            ))}
           </div>
           <div className="more">
             <Link to="/products">More</Link>
@@ -142,25 +158,12 @@ const Home = () => {
             }}
             className="mySwiper"
           >
-            <SwiperSlide>
-              <Review />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Review />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Review />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Review />
-            </SwiperSlide>
+            {reviews.map((review) => (
+              <SwiperSlide key={review._id}>
+                <Review data={review} />
+              </SwiperSlide>
+            ))}
           </Swiper>
-          {/* <div className="reviwe-wrapper">
-            <Review />
-            <Review />
-            <Review />
-            <Review />
-          </div> */}
         </div>
       </section>
       {/* footer setcion */}

@@ -6,6 +6,7 @@ import Home from "./components/home/Home";
 import LogIn from "./components/logIn/LogIn";
 import MakeAdmin from "./components/makeAdmin/MakeAdmin";
 import ManageAllOrder from "./components/manageAllOrder/ManageAllOrder";
+import ManageProducts from "./components/manageProduct/ManageProducts";
 import MyOrder from "./components/myOrder/MyOrder";
 import Payment from "./components/payment/Payment";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";
@@ -22,7 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
             <Route path="/login" element={<LogIn />} />
-            
+
             <Route
               path="/placeorder/:id"
               element={
@@ -32,7 +33,15 @@ function App() {
               }
             />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/dashboard" element={<Dashboard />}>
+
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            >
               <Route path="addreview" element={<AddReview />} />
               <Route path="" element={<MyOrder />} />
               <Route path="addproduct" element={<AddProduct />} />
@@ -40,7 +49,7 @@ function App() {
               <Route path="Payment" element={<Payment />} />
               <Route path="makeadmin" element={<MakeAdmin />} />
               <Route path="manageallproduct" element={<ManageAllOrder />} />
-              <Route path="manageproduct" element={<MakeAdmin />} />
+              <Route path="manageproduct" element={<ManageProducts />} />
             </Route>
           </Routes>
         </BrowserRouter>

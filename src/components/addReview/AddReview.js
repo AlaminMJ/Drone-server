@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import "./AddReview.css";
@@ -13,7 +14,10 @@ const AddReview = () => {
   } = useForm();
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:5000/reviews", { ...data, rating: rating })
+      .post("https://peaceful-sands-20601.herokuapp.com/reviews", {
+        ...data,
+        rating: rating,
+      })
       .then((res) => {
         console.log(res.data);
       });
@@ -21,11 +25,11 @@ const AddReview = () => {
   const ratingChanged = (newRating) => {
     setRating(newRating);
   };
-
+  const { user } = useAuth();
   return (
     <div className="add-review">
       <Form className="w-75 mx-auto" onSubmit={handleSubmit(onSubmit)}>
-        <h1 className="display-3 text-center">Add Review</h1>
+        <h1 className="display-6 text-center text-primary">Add Review</h1>
         <Row>
           <Col>
             <Form.Group as={Col} controlId="formGridEmail" className="mb-3">
@@ -34,6 +38,7 @@ const AddReview = () => {
                 type="text"
                 placeholder="Name"
                 required
+                value={user.displayName}
                 {...register("name", { required: true })}
               />
             </Form.Group>
@@ -45,6 +50,7 @@ const AddReview = () => {
                 type="email"
                 placeholder="Email"
                 required
+                value={user.email}
                 {...register("email", { required: true })}
               />
             </Form.Group>

@@ -10,7 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { axios } from "axios";
+import axios from "axios";
 
 firebaseInitialize();
 const useFirebase = () => {
@@ -50,39 +50,28 @@ const useFirebase = () => {
         callback(null);
       })
       .catch((err) => {
-        console.log(err);
-        callback("failur");
+        callback(err.message);
       })
       .finally(() => {
         setIsLoading(false);
       });
   };
-  const createUserEmail = (name, email, password) => {
+  const createUserEmail = (name, email, password, callback) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        console.log(name);
+        saveUser(name, email);
         updateProfile(auth.currentUser, {
           displayName: name,
-          photoURL:
-            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
         })
           .then(() => {
-            axios
-              .post("http://localhost:5000/users", {
-                name,
-                email: "demo",
-              })
-              .then((res) => {
-                console.log(res.data);
-              });
+            callback(null);
           })
-          .catch((error) => {
-            // An error occurred
-            // ...
+          .catch((err) => {
+            callback(err.message);
           });
       })
       .catch((error) => {
-        console.log(error);
+        callback(error.message);
       });
   };
 
@@ -95,6 +84,18 @@ const useFirebase = () => {
       })
       .catch(() => {})
       .finally(() => {});
+  };
+  // Save user
+  const saveUser = (name, email, img) => {
+    const user = { name, email, img };
+    axios
+      .post("https://peaceful-sands-20601.herokuapp.com/users", user)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return { user, isLoading, logInWithGoogle, signUp, logOut, createUserEmail };
 };

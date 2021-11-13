@@ -1,25 +1,25 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Button, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useFirebase from "../../hooks/useFirebase";
 import "./logIn.css";
 const LogIn = () => {
   const location = useLocation();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
   let from = location.state?.from?.pathname || "/";
-  const { signUp, user } = useFirebase();
+  const { signUp } = useFirebase();
 
-  const {
-    register,
-    handleSubmit,
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     signUp(data.email, data.password, (err) => {
       if (!err) {
         navigate(from, { replace: true });
+        setError("");
+      } else {
+        setError(err);
       }
-      console.log(user);
     });
   };
   return (
@@ -44,7 +44,11 @@ const LogIn = () => {
               {...register("password", { required: true })}
             />
           </Form.Group>
-
+          {error && (
+            <Alert key={1} variant={"danger"}>
+              {error}
+            </Alert>
+          )}
           <Button
             variant="primary"
             type="submit"

@@ -1,7 +1,26 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import axios from "axios";
+import { Form, Button, Alert } from "react-bootstrap";
 import "./makeAdmin.css";
 const MakeAdmin = () => {
+  const [email, setEmail] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const handelEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handelAdmin = () => {
+    axios
+      .put("https://peaceful-sands-20601.herokuapp.com/users/makeadmin", {
+        email,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setIsSuccess(true);
+      })
+      .catch((err) => {
+        setIsSuccess(false);
+      });
+  };
   return (
     <div className="make-admin">
       <div className="wrapper d-flex justify-content-center align-items-center flex-column">
@@ -10,13 +29,18 @@ const MakeAdmin = () => {
             Make Admin
           </h1>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              onFocus={handelEmail}
+            />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" onClick={handelAdmin}>
             Make Admin
           </Button>
         </Form>
+        {isSuccess && <Alert variant={"success"}>Successfull make admin</Alert>}
       </div>
     </div>
   );

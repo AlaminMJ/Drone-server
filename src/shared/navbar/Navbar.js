@@ -60,7 +60,14 @@ const Navbar = ({ to }) => {
               <>
                 <div className=" icons">
                   {/* <IoPersonOutline title="Profile" /> */}
-                  <img src={user?.photoURL} alt="profile" />
+                  <img
+                    src={
+                      user?.photoURL
+                        ? user?.photoURL
+                        : "https://w7.pngwing.com/pngs/340/956/png-transparent-profile-user-icon-computer-icons-user-profile-head-ico-miscellaneous-black-desktop-wallpaper.png"
+                    }
+                    alt="profile"
+                  />
                 </div>
                 <div className=" icons" onClick={logOut}>
                   <IoLogOutOutline title="Log Out" />

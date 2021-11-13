@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useFirebase from "../../hooks/useFirebase";
 import "./signUp.css";
@@ -12,9 +12,17 @@ const SignUp = () => {
     handleSubmit,
     // formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
   const onSubmit = (data) => {
     if (data.password === data.confirmPassword) {
-      createUserEmail(data.name, data.email, data.password);
+      createUserEmail(data.name, data.email, data.password, (err) => {
+        if (!err) {
+          navigate("/", { replace: true });
+          setError("");
+        } else {
+          setError(err);
+        }
+      });
       setError("");
     } else {
       setError("Password are not match");

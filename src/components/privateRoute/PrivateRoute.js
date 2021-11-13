@@ -5,7 +5,6 @@ import useFirebase from "../../hooks/useFirebase";
 function PrivateRoute({ children }) {
   let { user, isLoading } = useFirebase();
   let location = useLocation();
-  console.log(user.email);
   if (!isLoading) {
     if (!user.email) {
       return <Navigate to="/login" state={{ from: location }} />;

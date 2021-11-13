@@ -7,18 +7,22 @@ const AddProduct = () => {
   const {
     register,
     handleSubmit,
+    reset
     // formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    axios.post("http://localhost:5000/products", data).then((res) => {
-      console.log(res.data);
-    });
+    axios
+      .post("https://peaceful-sands-20601.herokuapp.com/products", data)
+      .then((res) => {
+        console.log(res.data);
+        reset();
+      });
   };
 
   return (
     <div className="add-product ">
       <Form className="w-75 mx-auto" onSubmit={handleSubmit(onSubmit)}>
-        <h1 className="display-5 text-center">Add Product</h1>
+        <h1 className="display-6  text-primary text-center">Add Product</h1>
 
         <Form.Group as={Col} controlId="formGridEmail" className="mb-3">
           <Form.Label>Product Name</Form.Label>
@@ -64,9 +68,9 @@ const AddProduct = () => {
           <Form.Control
             as="textarea"
             rows={5}
-            placeholder="Product Price"
+            placeholder="Description"
             required
-            {...register("price", { required: true })}
+            {...register("desc", { required: true })}
           />
         </Form.Group>
 

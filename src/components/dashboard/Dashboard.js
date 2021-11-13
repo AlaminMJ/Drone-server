@@ -1,7 +1,6 @@
 import React from "react";
-import { ListGroup } from "react-bootstrap";
-// import AddProduct from "../addProduct/AddProduct";
-import { Outlet } from "react-router-dom";
+import { ListGroup, Button } from "react-bootstrap";
+import { Outlet, Link } from "react-router-dom";
 import {
   BiCreditCardAlt,
   BiShoppingBag,
@@ -12,12 +11,24 @@ import {
   BiStats,
 } from "react-icons/bi";
 import "./dashboard.css";
-import DashboardNav from "../../shared/dashboardNavbar/DashboardNav";
+import logo from "../../images/logo.png";
+import useAuh from "../../hooks/useAuth";
 import DeashboardActivelink from "../../shared/customLilnk/DeashboardActivelink";
 const Dashboard = () => {
+  const { logOut } = useAuh();
   return (
     <div>
-      <DashboardNav />
+      <div className="dash-nav">
+        <div className="container">
+          <nav className="nav ">
+            <div className="logo">
+              <Link to="/">
+                <img src={logo} alt="logo" />
+              </Link>
+            </div>
+          </nav>
+        </div>
+      </div>
       <div className="dashboard">
         <div className="left">
           <h4 className="mb-3">Dashboard</h4>
@@ -44,7 +55,7 @@ const Dashboard = () => {
           <ListGroup as="ul" className="navigator">
             <DeashboardActivelink to="manageallproduct">
               <ListGroup.Item as="li">
-                <BiTask className="nav-icon" /> Manage All Product
+                <BiTask className="nav-icon" /> Manage All Order
               </ListGroup.Item>
             </DeashboardActivelink>
 
@@ -67,6 +78,9 @@ const Dashboard = () => {
               </ListGroup.Item>
             </DeashboardActivelink>
           </ListGroup>
+          <Button className="log-out " size="sm" onClick={logOut}>
+            Log Out
+          </Button>
         </div>
         <div className="right">
           <Outlet />

@@ -1,40 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Form, Row, Col, Button, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import "./placeOrder.css";
-import img from "../../images/bg2.jpg";
 import Navbar from "../../shared/navbar/Navbar";
 import { useParams } from "react-router";
+import axios from "axios";
 const PlaceOrder = () => {
+  const [product, setProduct] = useState({});
   const { id } = useParams();
-  const { user } = useAuth();
+  useEffect(() => {
+    axios(`https://peaceful-sands-20601.herokuapp.com/products/${id}`)
+      .then((res) => {
+        setProduct(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
   const {
     register,
     handleSubmit,
+    reset,
     // formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    axios
+      .post("https://peaceful-sands-20601.herokuapp.com/orders", {
+        ...data,
+        product,
+      })
+      .then((res) => {
+        console.log(res.data);
+        reset();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const { user } = useAuth();
+
   return (
     <div className="place-order">
       <Navbar />
       <div className="container">
-        <h1 className="display-3 text-center">
-          Place Order {id} {user.email}
-        </h1>
+        <h1 className="display-6 text-center text-primary">Place Order</h1>
         <div className="wrapper  py-5">
           <div className="left">
             <Card>
-              <Card.Img variant="top" src={img} />
+              <Card.Img variant="top" src={product.img} />
               <Card.Body>
-                <Card.Title>
-                  DJI Mavic 2 Enterprise Dual with Fly More Kit
-                </Card.Title>
-                <Card.Text>
-                  DJI Mavic 2 Enterprise Dual with Fly More Kit.DJI Mavic 2
-                  Enterprise Dual with Fly More Kit.DJI Mavic 2 Enterprise Dual
-                  with Fly More Kit
-                </Card.Text>
+                <Card.Title>{product.name}</Card.Title>
+                <Card.Text>{product.title}</Card.Text>
               </Card.Body>
             </Card>
           </div>
@@ -45,7 +63,10 @@ const PlaceOrder = () => {
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     placeholder="Enter Name"
-                    {...register("name", { required: true })}
+                    {...register("name", {
+                      value: user.email,
+                      required: true,
+                    })}
                   />
                 </Form.Group>
 
@@ -59,7 +80,10 @@ const PlaceOrder = () => {
                   <Form.Control
                     type="email"
                     placeholder="email"
-                    {...register("email", { required: true })}
+                    {...register("email", {
+                      value: user.email,
+                      required: true,
+                    })}
                   />
                 </Form.Group>
               </Row>
