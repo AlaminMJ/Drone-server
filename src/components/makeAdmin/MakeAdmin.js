@@ -8,14 +8,16 @@ const MakeAdmin = () => {
   const handelEmail = (e) => {
     setEmail(e.target.value);
   };
-  const handelAdmin = () => {
+  const handelAdmin = (e) => {
+    e.preventDefault();
     axios
       .put("https://peaceful-sands-20601.herokuapp.com/users/makeadmin", {
         email,
       })
       .then((res) => {
-        console.log(res.data);
-        setIsSuccess(true);
+        if (res.data.modifiedCount) {
+          setIsSuccess(true);
+        }
       })
       .catch((err) => {
         setIsSuccess(false);
@@ -24,7 +26,7 @@ const MakeAdmin = () => {
   return (
     <div className="make-admin">
       <div className="wrapper d-flex justify-content-center align-items-center flex-column">
-        <Form className="form p-4">
+        <Form className="form p-4" onSubmit={handelAdmin}>
           <h1 className="display-6 text-center text-primary mb-4">
             Make Admin
           </h1>
@@ -32,11 +34,11 @@ const MakeAdmin = () => {
             <Form.Control
               type="email"
               placeholder="Enter email"
-              onFocus={handelEmail}
+              onChange={handelEmail}
             />
           </Form.Group>
 
-          <Button variant="primary" onClick={handelAdmin}>
+          <Button variant="primary" type="submit">
             Make Admin
           </Button>
         </Form>

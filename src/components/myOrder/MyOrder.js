@@ -13,14 +13,18 @@ const MyOrder = () => {
     ).then((res) => {
       setMyorder(res.data);
     });
-  }, [isRelode]);
+  }, [isRelode, user]);
 
   return (
     <div className="my-order">
       <h5 className="display-6 text-center mb-4 text-primary">My Order</h5>
       <div className="wrapper">
         {myOrder.map((order) => (
-          <MyOrderCard data={order} setIsRelode isRelode />
+          <MyOrderCard
+            data={order}
+            setIsRelode={setIsRelode}
+            isRelode={isRelode}
+          />
         ))}
       </div>
     </div>

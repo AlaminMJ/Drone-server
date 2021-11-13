@@ -22,8 +22,8 @@ const useFirebase = () => {
   // log in with
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     onAuthStateChanged(auth, (user) => {
-      setIsLoading(true);
       if (user) {
         setUser(user);
       } else {
@@ -32,12 +32,13 @@ const useFirebase = () => {
       setIsLoading(false);
     });
   }, [auth]);
+
   useEffect(() => {
-    axios(
-      `https://peaceful-sands-20601.herokuapp.com/users/${user.email}`
-    ).then((res) => {
-      setIsAdmin(res?.data?.isAdmin);
-    });
+    axios(`https://peaceful-sands-20601.herokuapp.com/users/${user.email}`)
+      .then((res) => {
+        setIsAdmin(res?.data?.isAdmin);
+      })
+      .catch((err) => {});
   }, [user?.email]);
   const logInWithGoogle = () => {
     setIsLoading(true);
@@ -105,6 +106,7 @@ const useFirebase = () => {
         console.log(err);
       });
   };
+ 
   return {
     user,
     isLoading,

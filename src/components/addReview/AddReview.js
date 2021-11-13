@@ -10,6 +10,7 @@ const AddReview = () => {
   const {
     register,
     handleSubmit,
+    reset,
     // formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
@@ -19,7 +20,7 @@ const AddReview = () => {
         rating: rating,
       })
       .then((res) => {
-        console.log(res.data);
+        reset();
       });
   };
   const ratingChanged = (newRating) => {

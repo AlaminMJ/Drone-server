@@ -29,7 +29,7 @@ const Home = () => {
       .catch((err) => {
         console.log(err);
       });
-    axios("https://peaceful-sands-20601.herokuapp.com/products")
+    axios("https://peaceful-sands-20601.herokuapp.com/products?count=6")
       .then((res) => {
         setProducts(res.data);
       })

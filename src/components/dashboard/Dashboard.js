@@ -12,10 +12,10 @@ import {
 } from "react-icons/bi";
 import "./dashboard.css";
 import logo from "../../images/logo.png";
-import useAuh from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import DeashboardActivelink from "../../shared/customLilnk/DeashboardActivelink";
 const Dashboard = () => {
-  const { logOut, isAdmin } = useAuh();
+  const { logOut, isAdmin, user } = useAuth();
   return (
     <div>
       <div className="dash-nav">
@@ -26,6 +26,7 @@ const Dashboard = () => {
                 <img src={logo} alt="logo" />
               </Link>
             </div>
+            <div className="user">{user?.displayName}</div>
           </nav>
         </div>
       </div>

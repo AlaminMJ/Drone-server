@@ -15,7 +15,9 @@ import AdminRoute from "./components/privateRoute/AdminRoute";
 import Products from "./components/products/Products";
 import SignUp from "./components/signUp/SignUp";
 import AuthContext from "./context/authContext";
+import useFirebase from "./hooks/useFirebase";
 function App() {
+  const { isAdmin } = useFirebase();
   return (
     <div className="App">
       <AuthContext>
@@ -44,7 +46,12 @@ function App() {
               }
             >
               <Route path="addreview" element={<AddReview />} />
-              <Route path="" element={<MyOrder />} />
+              {!isAdmin ? (
+                <Route path="" element={<MyOrder />} />
+              ) : (
+                <Route path="" element={<ManageAllOrder />} />
+              )}
+
               <Route
                 path="addproduct"
                 element={

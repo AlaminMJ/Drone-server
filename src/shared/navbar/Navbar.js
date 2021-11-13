@@ -21,7 +21,6 @@ const Navbar = ({ to }) => {
 
   // const {} = useAuth();
   const { logOut, user } = UseFirebase();
-  console.log(user);
 
   return (
     <div className="navbar-m stic">
