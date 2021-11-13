@@ -11,6 +11,7 @@ import MyOrder from "./components/myOrder/MyOrder";
 import Payment from "./components/payment/Payment";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
+import AdminRoute from "./components/privateRoute/AdminRoute";
 import Products from "./components/products/Products";
 import SignUp from "./components/signUp/SignUp";
 import AuthContext from "./context/authContext";
@@ -44,12 +45,40 @@ function App() {
             >
               <Route path="addreview" element={<AddReview />} />
               <Route path="" element={<MyOrder />} />
-              <Route path="addproduct" element={<AddProduct />} />
+              <Route
+                path="addproduct"
+                element={
+                  <AdminRoute>
+                    <AddProduct />
+                  </AdminRoute>
+                }
+              />
               <Route path="myorder" element={<MyOrder />} />
               <Route path="Payment" element={<Payment />} />
-              <Route path="makeadmin" element={<MakeAdmin />} />
-              <Route path="manageallproduct" element={<ManageAllOrder />} />
-              <Route path="manageproduct" element={<ManageProducts />} />
+              <Route
+                path="makeadmin"
+                element={
+                  <AdminRoute>
+                    <MakeAdmin />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="manageallproduct"
+                element={
+                  <AdminRoute>
+                    <ManageAllOrder />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="manageproduct"
+                element={
+                  <AdminRoute>
+                    <ManageProducts />
+                  </AdminRoute>
+                }
+              />
             </Route>
           </Routes>
         </BrowserRouter>

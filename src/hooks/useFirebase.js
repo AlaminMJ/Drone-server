@@ -20,6 +20,7 @@ const useFirebase = () => {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   // log in with
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setIsLoading(true);
@@ -31,6 +32,13 @@ const useFirebase = () => {
       setIsLoading(false);
     });
   }, [auth]);
+  useEffect(() => {
+    axios(
+      `https://peaceful-sands-20601.herokuapp.com/users/${user.email}`
+    ).then((res) => {
+      setIsAdmin(res?.data?.isAdmin);
+    });
+  }, [user?.email]);
   const logInWithGoogle = () => {
     setIsLoading(true);
     signInWithPopup(auth, GoogleProvider)
@@ -97,6 +105,14 @@ const useFirebase = () => {
         console.log(err);
       });
   };
-  return { user, isLoading, logInWithGoogle, signUp, logOut, createUserEmail };
+  return {
+    user,
+    isLoading,
+    isAdmin,
+    logInWithGoogle,
+    signUp,
+    logOut,
+    createUserEmail,
+  };
 };
 export default useFirebase;

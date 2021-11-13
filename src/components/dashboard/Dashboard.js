@@ -15,7 +15,7 @@ import logo from "../../images/logo.png";
 import useAuh from "../../hooks/useAuth";
 import DeashboardActivelink from "../../shared/customLilnk/DeashboardActivelink";
 const Dashboard = () => {
-  const { logOut } = useAuh();
+  const { logOut, isAdmin } = useAuh();
   return (
     <div>
       <div className="dash-nav">
@@ -32,52 +32,56 @@ const Dashboard = () => {
       <div className="dashboard">
         <div className="left">
           <h4 className="mb-3">Dashboard</h4>
-          <ListGroup as="ul" className="navigator">
-            <DeashboardActivelink to="myorder">
-              <ListGroup.Item as="li">
-                <BiShoppingBag className="nav-icon" /> My Order
-              </ListGroup.Item>
-            </DeashboardActivelink>
-            <DeashboardActivelink to="payment">
-              <ListGroup.Item as="li">
-                <BiCreditCardAlt className="nav-icon" />
-                Payment
-              </ListGroup.Item>
-            </DeashboardActivelink>
-            <DeashboardActivelink to="addreview">
-              <ListGroup.Item as="li">
-                <BiHeart className="nav-icon" />
-                Review
-              </ListGroup.Item>
-            </DeashboardActivelink>
-          </ListGroup>
-          {/* admin */}
-          <ListGroup as="ul" className="navigator">
-            <DeashboardActivelink to="manageallproduct">
-              <ListGroup.Item as="li">
-                <BiTask className="nav-icon" /> Manage All Order
-              </ListGroup.Item>
-            </DeashboardActivelink>
+          {!isAdmin ? (
+            <ListGroup as="ul" className="navigator">
+              <DeashboardActivelink to="myorder">
+                <ListGroup.Item as="li">
+                  <BiShoppingBag className="nav-icon" /> My Order
+                </ListGroup.Item>
+              </DeashboardActivelink>
+              <DeashboardActivelink to="payment">
+                <ListGroup.Item as="li">
+                  <BiCreditCardAlt className="nav-icon" />
+                  Payment
+                </ListGroup.Item>
+              </DeashboardActivelink>
+              <DeashboardActivelink to="addreview">
+                <ListGroup.Item as="li">
+                  <BiHeart className="nav-icon" />
+                  Review
+                </ListGroup.Item>
+              </DeashboardActivelink>
+            </ListGroup>
+          ) : (
+            <>
+              <ListGroup as="ul" className="navigator">
+                <DeashboardActivelink to="manageallproduct">
+                  <ListGroup.Item as="li">
+                    <BiTask className="nav-icon" /> Manage All Order
+                  </ListGroup.Item>
+                </DeashboardActivelink>
 
-            <DeashboardActivelink to="addproduct">
-              <ListGroup.Item as="li">
-                <BiPlus className="nav-icon" />
-                Add A Product
-              </ListGroup.Item>
-            </DeashboardActivelink>
-            <DeashboardActivelink to="makeadmin">
-              <ListGroup.Item as="li">
-                <BiUserPlus className="nav-icon" />
-                Make Admin
-              </ListGroup.Item>
-            </DeashboardActivelink>
-            <DeashboardActivelink to="manageproduct">
-              <ListGroup.Item as="li">
-                <BiStats className="nav-icon" />
-                Manage products
-              </ListGroup.Item>
-            </DeashboardActivelink>
-          </ListGroup>
+                <DeashboardActivelink to="addproduct">
+                  <ListGroup.Item as="li">
+                    <BiPlus className="nav-icon" />
+                    Add A Product
+                  </ListGroup.Item>
+                </DeashboardActivelink>
+                <DeashboardActivelink to="makeadmin">
+                  <ListGroup.Item as="li">
+                    <BiUserPlus className="nav-icon" />
+                    Make Admin
+                  </ListGroup.Item>
+                </DeashboardActivelink>
+                <DeashboardActivelink to="manageproduct">
+                  <ListGroup.Item as="li">
+                    <BiStats className="nav-icon" />
+                    Manage products
+                  </ListGroup.Item>
+                </DeashboardActivelink>
+              </ListGroup>
+            </>
+          )}
           <Button className="log-out " size="sm" onClick={logOut}>
             Log Out
           </Button>

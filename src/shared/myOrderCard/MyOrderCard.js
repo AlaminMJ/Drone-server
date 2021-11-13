@@ -1,21 +1,32 @@
+import axios from "axios";
 import React from "react";
 import "./myOrderCard.css";
-const MyOrderCard = () => {
+
+const MyOrderCard = ({ data, isRelode, setIsRelode }) => {
+  const { product } = data;
+
+  const handelDelete = (id) => {
+    axios
+      .delete(`https://peaceful-sands-20601.herokuapp.com/orders/${data._id}`)
+      .then((res) => {
+        setIsRelode(!isRelode);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="order-card">
       <div className="product-img">
-        <img
-          src="https://ld-wt73.template-help.com/tf/airy/images/product-01-510x510.jpg"
-          alt=""
-        />
+        <img src={product.img} alt={product.name} />
       </div>
-      <button className="status complite">Pending</button>
-      <h4 className="product-title">
-        DJI Mavic 2 Enterprise Dual with Fly More Kit
-      </h4>
+      <button className="status complite">{product.status}</button>
+      <h4 className="product-title">{product.title}</h4>
       <div className="cost">
-        <p className="price"> $45.89</p>
-        <button className="delete">Remove</button>
+        <p className="price"> {product.price}</p>
+        <button className="delete" onClick={handelDelete}>
+          Remove
+        </button>
       </div>
     </div>
   );
